@@ -19,7 +19,10 @@ function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold">{categories.length}</p>
-            <Link to="/admin/categories" className="text-sm text-muted-foreground underline">
+            <Link
+              to="/admin/categories"
+              className="text-muted-foreground text-sm underline"
+            >
               Manage categories
             </Link>
           </CardContent>
@@ -30,7 +33,10 @@ function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold">{products.length}</p>
-            <Link to="/admin/products" className="text-sm text-muted-foreground underline">
+            <Link
+              to="/admin/products"
+              className="text-muted-foreground text-sm underline"
+            >
               Manage products
             </Link>
           </CardContent>

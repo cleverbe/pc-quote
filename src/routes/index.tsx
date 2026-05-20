@@ -10,7 +10,7 @@ function Home() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 text-center">
       <h1 className="text-4xl font-bold tracking-tight">PC Quote</h1>
-      <p className="mt-3 text-lg text-muted-foreground">
+      <p className="text-muted-foreground mt-3 text-lg">
         Build and quote custom computer configurations for your clients.
       </p>
       <div className="mt-8 flex justify-center gap-4">
@@ -27,7 +27,7 @@ function Home() {
           <CardHeader>
             <CardTitle>1. Categories</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
+          <CardContent className="text-muted-foreground text-sm">
             Create product categories like Processors, RAM, Keyboards, etc.
           </CardContent>
         </Card>
@@ -35,7 +35,7 @@ function Home() {
           <CardHeader>
             <CardTitle>2. Products</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
+          <CardContent className="text-muted-foreground text-sm">
             Add products with prices and assign them to categories.
           </CardContent>
         </Card>
@@ -43,7 +43,7 @@ function Home() {
           <CardHeader>
             <CardTitle>3. Quote</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
+          <CardContent className="text-muted-foreground text-sm">
             Select components and generate a quote with the total price.
           </CardContent>
         </Card>

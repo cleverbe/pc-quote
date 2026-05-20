@@ -39,10 +39,22 @@ export const Route = createFileRoute('/admin/products')({
 })
 
 function ProductsPage() {
-  const { products, categories, addProduct, updateProduct, deleteProduct, getCategoryName } = useStore()
+  const {
+    products,
+    categories,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    getCategoryName,
+  } = useStore()
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState<Product | null>(null)
-  const [form, setForm] = useState({ name: '', description: '', price: '', categoryId: '' })
+  const [form, setForm] = useState({
+    name: '',
+    description: '',
+    price: '',
+    categoryId: '',
+  })
 
   function resetForm() {
     setForm({ name: '', description: '', price: '', categoryId: '' })
@@ -63,10 +75,21 @@ function ProductsPage() {
   function handleSave() {
     if (!form.name.trim() || !form.price || !form.categoryId) return
     if (editing) {
-      updateProduct(editing.id, form.name.trim(), form.description.trim(), Number.parseFloat(form.price), form.categoryId)
+      updateProduct(
+        editing.id,
+        form.name.trim(),
+        form.description.trim(),
+        Number.parseFloat(form.price),
+        form.categoryId,
+      )
       toast.success('Product updated')
     } else {
-      addProduct(form.name.trim(), form.description.trim(), Number.parseFloat(form.price), form.categoryId)
+      addProduct(
+        form.name.trim(),
+        form.description.trim(),
+        Number.parseFloat(form.price),
+        form.categoryId,
+      )
       toast.success('Product created')
     }
     setOpen(false)
@@ -83,7 +106,13 @@ function ProductsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Products</h1>
-        <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) resetForm() }}>
+        <Dialog
+          open={open}
+          onOpenChange={(v) => {
+            setOpen(v)
+            if (!v) resetForm()
+          }}
+        >
           <DialogTrigger asChild>
             <Button>
               <Plus className="size-4" />
@@ -92,16 +121,26 @@ function ProductsPage() {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>{editing ? 'Edit Product' : 'New Product'}</DialogTitle>
+              <DialogTitle>
+                {editing ? 'Edit Product' : 'New Product'}
+              </DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Core i5-13400" />
+                <Input
+                  id="name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="e.g. Core i5-13400"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <Select value={form.categoryId} onValueChange={(v) => setForm({ ...form, categoryId: v })}>
+                <Select
+                  value={form.categoryId}
+                  onValueChange={(v) => setForm({ ...form, categoryId: v })}
+                >
                   <SelectTrigger id="category">
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
@@ -116,11 +155,26 @@ function ProductsPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="price">Price ($)</Label>
-                <Input id="price" type="number" step="0.01" min="0" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} placeholder="0.00" />
+                <Input
+                  id="price"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={form.price}
+                  onChange={(e) => setForm({ ...form, price: e.target.value })}
+                  placeholder="0.00"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Product description" />
+                <Textarea
+                  id="description"
+                  value={form.description}
+                  onChange={(e) =>
+                    setForm({ ...form, description: e.target.value })
+                  }
+                  placeholder="Product description"
+                />
               </div>
               <div className="flex justify-end gap-2">
                 <DialogClose asChild>
@@ -139,7 +193,9 @@ function ProductsPage() {
         </CardHeader>
         <CardContent>
           {products.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No products yet. Create categories first, then add products.</p>
+            <p className="text-muted-foreground text-sm">
+              No products yet. Create categories first, then add products.
+            </p>
           ) : (
             <Table>
               <TableHeader>
@@ -154,16 +210,32 @@ function ProductsPage() {
               <TableBody>
                 {products.map((product) => (
                   <TableRow key={product.id}>
-                    <TableCell className="font-medium">{product.name}</TableCell>
-                    <TableCell><Badge variant="secondary">{getCategoryName(product.categoryId)}</Badge></TableCell>
+                    <TableCell className="font-medium">
+                      {product.name}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">
+                        {getCategoryName(product.categoryId)}
+                      </Badge>
+                    </TableCell>
                     <TableCell>${product.price.toFixed(2)}</TableCell>
-                    <TableCell className="text-muted-foreground max-w-xs truncate">{product.description || '—'}</TableCell>
+                    <TableCell className="text-muted-foreground max-w-xs truncate">
+                      {product.description || '—'}
+                    </TableCell>
                     <TableCell>
                       <div className="flex gap-1">
-                        <Button variant="ghost" size="icon" onClick={() => handleEdit(product)}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEdit(product)}
+                        >
                           <Pencil className="size-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" onClick={() => handleDelete(product.id)}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(product.id)}
+                        >
                           <Trash2 className="size-4" />
                         </Button>
                       </div>

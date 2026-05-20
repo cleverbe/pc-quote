@@ -70,7 +70,13 @@ function CategoriesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Categories</h1>
-        <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) resetForm() }}>
+        <Dialog
+          open={open}
+          onOpenChange={(v) => {
+            setOpen(v)
+            if (!v) resetForm()
+          }}
+        >
           <DialogTrigger asChild>
             <Button>
               <Plus className="size-4" />
@@ -79,16 +85,30 @@ function CategoriesPage() {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>{editing ? 'Edit Category' : 'New Category'}</DialogTitle>
+              <DialogTitle>
+                {editing ? 'Edit Category' : 'New Category'}
+              </DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Processors" />
+                <Input
+                  id="name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="e.g. Processors"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Category description" />
+                <Textarea
+                  id="description"
+                  value={form.description}
+                  onChange={(e) =>
+                    setForm({ ...form, description: e.target.value })
+                  }
+                  placeholder="Category description"
+                />
               </div>
               <div className="flex justify-end gap-2">
                 <DialogClose asChild>
@@ -107,7 +127,9 @@ function CategoriesPage() {
         </CardHeader>
         <CardContent>
           {categories.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No categories yet. Create your first one.</p>
+            <p className="text-muted-foreground text-sm">
+              No categories yet. Create your first one.
+            </p>
           ) : (
             <Table>
               <TableHeader>
@@ -121,13 +143,23 @@ function CategoriesPage() {
                 {categories.map((cat) => (
                   <TableRow key={cat.id}>
                     <TableCell className="font-medium">{cat.name}</TableCell>
-                    <TableCell className="text-muted-foreground">{cat.description || '—'}</TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {cat.description || '—'}
+                    </TableCell>
                     <TableCell>
                       <div className="flex gap-1">
-                        <Button variant="ghost" size="icon" onClick={() => handleEdit(cat)}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEdit(cat)}
+                        >
                           <Pencil className="size-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" onClick={() => handleDelete(cat.id)}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(cat.id)}
+                        >
                           <Trash2 className="size-4" />
                         </Button>
                       </div>

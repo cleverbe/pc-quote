@@ -12,12 +12,12 @@ export const Route = createRootRoute({
             <MonitorSmartphone className="size-5" />
             PC Quote
           </Link>
-          <nav className="flex items-center gap-4 text-sm ml-auto">
+          <nav className="ml-auto flex items-center gap-4 text-sm">
             <Link to="/" className="[&.active]:font-medium">
               Home
             </Link>
             <Link to="/admin" className="[&.active]:font-medium">
-              <Store className="size-4 inline mr-1" />
+              <Store className="mr-1 inline size-4" />
               Admin
             </Link>
           </nav>
