@@ -15,7 +15,7 @@ function RootLayout() {
   const [open, setOpen] = useState(false)
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <header className="bg-card border-b">
         <div className="mx-auto flex h-14 max-w-7xl items-center gap-6 px-4">
           <Link
@@ -105,8 +105,22 @@ function RootLayout() {
         </>
       )}
 
-      <Outlet />
+      <div className="flex-1">
+        <Outlet />
+      </div>
+      <footer className="border-border mx-auto flex w-full max-w-7xl items-center justify-center gap-2 border-t px-4 py-3 text-xs text-neutral-500">
+        <span>&copy; {new Date().getFullYear()} CleverBe</span>
+        <span aria-hidden="true">·</span>
+        <a
+          href="https://github.com/CleverBe"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-foreground transition-colors"
+        >
+          github.com/CleverBe
+        </a>
+      </footer>
       <Toaster richColors position="bottom-right" />
-    </>
+    </div>
   )
 }

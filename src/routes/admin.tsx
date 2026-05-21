@@ -33,7 +33,7 @@ function AdminLayout() {
   ]
 
   return (
-    <div className="flex min-h-[calc(100vh-57px)]">
+    <div className="flex min-h-0 flex-1">
       <button
         type="button"
         onClick={() => setOpen(true)}

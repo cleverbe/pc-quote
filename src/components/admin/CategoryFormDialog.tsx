@@ -30,6 +30,15 @@ function CategoryForm({
   const { t } = useTranslation()
   const [name, setName] = useState(editing?.name ?? '')
   const [desc, setDesc] = useState(editing?.description ?? '')
+  const [errors, setErrors] = useState<{ name?: string }>({})
+
+  function handleSave() {
+    const next: { name?: string } = {}
+    if (!name.trim()) next.name = t('admin.categories.nameRequired')
+    setErrors(next)
+    if (next.name) return
+    onSave(name.trim(), desc.trim())
+  }
 
   return (
     <div className="space-y-4">
@@ -38,9 +47,15 @@ function CategoryForm({
         <Input
           id="cat-name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value)
+            if (errors.name) setErrors({})
+          }}
           placeholder={t('admin.categories.namePlaceholder')}
         />
+        {errors.name && (
+          <p className="text-destructive text-xs">{errors.name}</p>
+        )}
       </div>
       <div className="space-y-2">
         <Label htmlFor="cat-desc">{t('admin.categories.descLabel')}</Label>
@@ -57,7 +72,7 @@ function CategoryForm({
             {t('common.cancel')}
           </Button>
         </DialogClose>
-        <Button onClick={() => onSave(name, desc)}>{t('common.save')}</Button>
+        <Button onClick={handleSave}>{t('common.save')}</Button>
       </div>
     </div>
   )

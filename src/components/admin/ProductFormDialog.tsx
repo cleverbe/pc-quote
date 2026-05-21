@@ -50,6 +50,23 @@ function ProductForm({
   const [price, setPrice] = useState(editing?.price.toString() ?? '')
   const [categoryId, setCategoryId] = useState(editing?.categoryId ?? '')
   const [state, setState] = useState(editing?.state ?? true)
+  const [errors, setErrors] = useState<{
+    name?: string
+    categoryId?: string
+    price?: string
+  }>({})
+
+  function handleSave() {
+    const next: typeof errors = {}
+    if (!name.trim()) next.name = t('admin.products.nameRequired')
+    if (!categoryId) next.categoryId = t('admin.products.categoryRequired')
+    const parsed = Number.parseFloat(price)
+    if (!price || Number.isNaN(parsed) || parsed <= 0)
+      next.price = t('admin.products.priceInvalid')
+    setErrors(next)
+    if (next.name || next.categoryId || next.price) return
+    onSave(name.trim(), desc.trim(), parsed, categoryId, state)
+  }
 
   return (
     <div className="space-y-4">
@@ -58,15 +75,28 @@ function ProductForm({
         <Input
           id="prod-name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value)
+            if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }))
+          }}
           placeholder={t('admin.products.namePlaceholder')}
         />
+        {errors.name && (
+          <p className="text-destructive text-xs">{errors.name}</p>
+        )}
       </div>
       <div className="space-y-2">
         <Label htmlFor="prod-category">
           {t('admin.products.categoryLabel')}
         </Label>
-        <Select value={categoryId} onValueChange={setCategoryId}>
+        <Select
+          value={categoryId}
+          onValueChange={(v) => {
+            setCategoryId(v)
+            if (errors.categoryId)
+              setErrors((prev) => ({ ...prev, categoryId: undefined }))
+          }}
+        >
           <SelectTrigger id="prod-category">
             <SelectValue
               placeholder={t('admin.products.categoryPlaceholder')}
@@ -80,6 +110,9 @@ function ProductForm({
             ))}
           </SelectContent>
         </Select>
+        {errors.categoryId && (
+          <p className="text-destructive text-xs">{errors.categoryId}</p>
+        )}
       </div>
       <div className="space-y-2">
         <Label htmlFor="prod-price">{t('admin.products.priceLabel')}</Label>
@@ -89,9 +122,16 @@ function ProductForm({
           step="0.01"
           min="0"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => {
+            setPrice(e.target.value)
+            if (errors.price)
+              setErrors((prev) => ({ ...prev, price: undefined }))
+          }}
           placeholder={t('admin.products.pricePlaceholder')}
         />
+        {errors.price && (
+          <p className="text-destructive text-xs">{errors.price}</p>
+        )}
       </div>
       <div className="space-y-2">
         <Label htmlFor="prod-desc">{t('admin.products.descLabel')}</Label>
@@ -128,13 +168,7 @@ function ProductForm({
             {t('common.cancel')}
           </Button>
         </DialogClose>
-        <Button
-          onClick={() =>
-            onSave(name, desc, Number.parseFloat(price), categoryId, state)
-          }
-        >
-          {t('common.save')}
-        </Button>
+        <Button onClick={handleSave}>{t('common.save')}</Button>
       </div>
     </div>
   )
