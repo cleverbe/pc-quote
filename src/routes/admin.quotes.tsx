@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { useStore } from '@/hooks/use-store'
 import { QuoteTable } from '@/components/admin/QuoteTable'
 import { QuoteDetailDialog } from '@/components/admin/QuoteDetailDialog'
@@ -9,6 +10,7 @@ export const Route = createFileRoute('/admin/quotes')({
 })
 
 function AdminQuotesPage() {
+  const { t } = useTranslation()
   const { savedQuotes, getCategoryName, deleteQuote, updateQuote } = useStore()
   const [viewing, setViewing] = useState<string | null>(null)
 
@@ -18,10 +20,11 @@ function AdminQuotesPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Quotes</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t('admin.quotes.title')}
+          </h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            {savedQuotes.length} saved quote
-            {savedQuotes.length !== 1 ? 's' : ''}
+            {t('admin.quotes.subtitle', { count: savedQuotes.length })}
           </p>
         </div>
       </div>

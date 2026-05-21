@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Minus, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { Product } from '@/types'
@@ -15,6 +16,8 @@ export function ProductCard({
   onToggle,
   onUpdateQuantity,
 }: Props) {
+  const { t } = useTranslation()
+
   return (
     <button
       type="button"
@@ -62,7 +65,7 @@ export function ProductCard({
         </div>
       ) : (
         <span className="text-muted-foreground mt-0.5 text-xs">
-          Click to select
+          {t('build.clickToSelect')}
         </span>
       )}
     </button>

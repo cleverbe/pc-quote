@@ -4,21 +4,31 @@ import {
   Outlet,
   useLocation,
 } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { Package, Tags, LayoutDashboard, FileText } from 'lucide-react'
 
 export const Route = createFileRoute('/admin')({
   component: AdminLayout,
 })
 
-const navItems = [
-  { to: '/admin', label: 'Overview', icon: LayoutDashboard },
-  { to: '/admin/categories', label: 'Categories', icon: Tags },
-  { to: '/admin/products', label: 'Products', icon: Package },
-  { to: '/admin/quotes', label: 'Quotes', icon: FileText },
-]
-
 function AdminLayout() {
+  const { t } = useTranslation()
   const { pathname } = useLocation()
+
+  const navItems = [
+    { to: '/admin', label: t('admin.sidebar.overview'), icon: LayoutDashboard },
+    {
+      to: '/admin/categories',
+      label: t('admin.sidebar.categories'),
+      icon: Tags,
+    },
+    {
+      to: '/admin/products',
+      label: t('admin.sidebar.products'),
+      icon: Package,
+    },
+    { to: '/admin/quotes', label: t('admin.sidebar.quotes'), icon: FileText },
+  ]
 
   return (
     <div className="flex min-h-[calc(100vh-57px)]">

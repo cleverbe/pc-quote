@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Trash2, Eye, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SearchInput } from '@/components/ui/search-input'
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export function QuoteTable({ savedQuotes, onView, onDelete }: Props) {
+  const { t } = useTranslation()
   const [search, setSearch] = useState('')
 
   const query = search.toLowerCase().trim()
@@ -35,7 +37,7 @@ export function QuoteTable({ savedQuotes, onView, onDelete }: Props) {
     <div className="bg-card border-border rounded-lg border">
       <div className="border-b px-4 py-3">
         <SearchInput
-          placeholder="Search by client name or phone…"
+          placeholder={t('admin.quotes.searchPlaceholder')}
           value={search}
           onChange={setSearch}
         />
@@ -45,19 +47,25 @@ export function QuoteTable({ savedQuotes, onView, onDelete }: Props) {
         <div className="flex flex-col items-center gap-3 py-16 text-center">
           <FileText className="text-muted-foreground size-10" />
           <p className="text-muted-foreground text-sm">
-            {query ? 'No quotes match your search.' : 'No saved quotes yet.'}
+            {query
+              ? t('admin.quotes.noSearchResults')
+              : t('admin.quotes.noQuotes')}
           </p>
         </div>
       ) : (
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Client</TableHead>
-              <TableHead>Phone</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Items</TableHead>
-              <TableHead className="text-right">Total</TableHead>
-              <TableHead className="w-24 text-right">Actions</TableHead>
+              <TableHead>{t('admin.quotes.client')}</TableHead>
+              <TableHead>{t('admin.quotes.phone')}</TableHead>
+              <TableHead>{t('admin.quotes.date')}</TableHead>
+              <TableHead>{t('admin.quotes.items')}</TableHead>
+              <TableHead className="text-right">
+                {t('admin.quotes.total')}
+              </TableHead>
+              <TableHead className="w-24 text-right">
+                {t('admin.quotes.actions')}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -73,7 +81,8 @@ export function QuoteTable({ savedQuotes, onView, onDelete }: Props) {
                   {new Date(quote.createdAt).toLocaleDateString()}
                 </TableCell>
                 <TableCell>
-                  {quote.items.reduce((s, i) => s + i.quantity, 0)} units
+                  {quote.items.reduce((s, i) => s + i.quantity, 0)}{' '}
+                  {t('admin.quotes.units')}
                 </TableCell>
                 <TableCell className="text-right font-medium tabular-nums">
                   ${quote.finalTotal.toFixed(2)}

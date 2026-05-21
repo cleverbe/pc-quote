@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -26,36 +27,37 @@ function CategoryForm({
   editing: Category | null
   onSave: Props['onSave']
 }) {
+  const { t } = useTranslation()
   const [name, setName] = useState(editing?.name ?? '')
   const [desc, setDesc] = useState(editing?.description ?? '')
 
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="cat-name">Name</Label>
+        <Label htmlFor="cat-name">{t('admin.categories.nameLabel')}</Label>
         <Input
           id="cat-name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="e.g. Processors"
+          placeholder={t('admin.categories.namePlaceholder')}
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="cat-desc">Description</Label>
+        <Label htmlFor="cat-desc">{t('admin.categories.descLabel')}</Label>
         <Textarea
           id="cat-desc"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
-          placeholder="Category description"
+          placeholder={t('admin.categories.descPlaceholder')}
         />
       </div>
       <div className="flex justify-end gap-2">
         <DialogClose asChild>
           <Button variant="outline" type="button">
-            Cancel
+            {t('common.cancel')}
           </Button>
         </DialogClose>
-        <Button onClick={() => onSave(name, desc)}>Save</Button>
+        <Button onClick={() => onSave(name, desc)}>{t('common.save')}</Button>
       </div>
     </div>
   )
@@ -67,12 +69,16 @@ export function CategoryFormDialog({
   onOpenChange,
   onSave,
 }: Props) {
+  const { t } = useTranslation()
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {editing ? 'Edit Category' : 'New Category'}
+            {editing
+              ? t('admin.categories.editTitle')
+              : t('admin.categories.newTitle')}
           </DialogTitle>
         </DialogHeader>
         <CategoryForm

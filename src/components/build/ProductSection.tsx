@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   ChevronDown,
   ChevronRight,
@@ -26,8 +27,6 @@ const accents = [
   'border-indigo-500 bg-indigo-50/50',
   'border-teal-500 bg-teal-50/50',
 ] as const
-
-const sortLabel: Record<SortField, string> = { name: 'Name', price: 'Price' }
 
 interface Props {
   category: Category
@@ -60,8 +59,14 @@ export function ProductSection({
   onToggleProduct,
   onUpdateQuantity,
 }: Props) {
+  const { t } = useTranslation()
   const [sortField, setSortField] = useState<SortField>('name')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
+
+  const sortLabel: Record<SortField, string> = {
+    name: t('build.sortName'),
+    price: t('build.sortPrice'),
+  }
 
   const selectedMap = new Map(
     selectedList.map((item) => [item.product.id, item]),
@@ -90,7 +95,9 @@ export function ProductSection({
           <Badge variant="outline" className="text-muted-foreground">
             {category.name}
           </Badge>
-          <span className="text-muted-foreground text-xs">no matches</span>
+          <span className="text-muted-foreground text-xs">
+            {t('build.noMatches')}
+          </span>
         </div>
       </section>
     )
@@ -128,7 +135,7 @@ export function ProductSection({
             variant="default"
             className="bg-primary/10 text-primary hover:bg-primary/15"
           >
-            {totalSelected} selected
+            {t('build.selected', { count: totalSelected })}
           </Badge>
         )}
 

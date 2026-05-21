@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { useStore } from '@/hooks/use-store'
 import { Package, Tags } from 'lucide-react'
 
@@ -7,16 +8,17 @@ export const Route = createFileRoute('/admin/')({
 })
 
 function AdminDashboard() {
+  const { t } = useTranslation()
   const { categories, products } = useStore()
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-xl font-semibold tracking-tight">
-          Admin Dashboard
+          {t('admin.dashboard.title')}
         </h1>
         <p className="text-muted-foreground mt-0.5 text-sm">
-          Manage your product catalog
+          {t('admin.dashboard.subtitle')}
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -25,7 +27,7 @@ function AdminDashboard() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-muted-foreground text-sm font-medium">
-                  Categories
+                  {t('admin.dashboard.categories')}
                 </p>
                 <p className="mt-1 text-3xl font-semibold tracking-tight">
                   {categories.length}
@@ -36,7 +38,7 @@ function AdminDashboard() {
               </div>
             </div>
             <p className="text-muted-foreground mt-3 text-xs">
-              Manage categories →
+              {t('admin.dashboard.manageCategories')}
             </p>
           </div>
         </Link>
@@ -45,7 +47,7 @@ function AdminDashboard() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-muted-foreground text-sm font-medium">
-                  Products
+                  {t('admin.dashboard.products')}
                 </p>
                 <p className="mt-1 text-3xl font-semibold tracking-tight">
                   {products.length}
@@ -56,7 +58,7 @@ function AdminDashboard() {
               </div>
             </div>
             <p className="text-muted-foreground mt-3 text-xs">
-              Manage products →
+              {t('admin.dashboard.manageProducts')}
             </p>
           </div>
         </Link>

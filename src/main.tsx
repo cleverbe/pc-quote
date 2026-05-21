@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { StoreProvider } from '@/stores/StoreProvider'
 import { routeTree } from './routeTree.gen'
+import './i18n'
 import './index.css'
 
 const router = createRouter({ routeTree })

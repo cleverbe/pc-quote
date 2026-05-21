@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import html2canvas from 'html2canvas-pro'
 import { Pencil, Download, Printer } from 'lucide-react'
 import { toast } from 'sonner'
@@ -38,6 +39,7 @@ export function QuoteDetailDialog({
   onOpenChange,
   onUpdateQuote,
 }: Props) {
+  const { t } = useTranslation()
   const [editingName, setEditingName] = useState(quote?.clientName ?? '')
   const [editingPhone, setEditingPhone] = useState(quote?.clientPhone ?? '')
   const quoteRef = useRef<HTMLDivElement>(null)
@@ -49,7 +51,7 @@ export function QuoteDetailDialog({
       clientName: editingName.trim(),
       clientPhone: editingPhone.trim(),
     })
-    toast.success('Client info updated')
+    toast.success(t('admin.quotes.clientUpdated'))
   }
 
   function handlePrint() {
@@ -92,7 +94,7 @@ export function QuoteDetailDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>Quote Details</DialogTitle>
+          <DialogTitle>{t('admin.quotes.detailTitle')}</DialogTitle>
         </DialogHeader>
 
         {quote && (
@@ -100,7 +102,7 @@ export function QuoteDetailDialog({
             <div className="bg-secondary/50 flex items-end gap-3 rounded-lg px-4 py-3 text-sm">
               <div className="flex-1">
                 <span className="text-muted-foreground mb-1 block text-xs">
-                  Client *
+                  {t('admin.quotes.clientLabel')} *
                 </span>
                 <input
                   type="text"
@@ -111,7 +113,7 @@ export function QuoteDetailDialog({
               </div>
               <div className="flex-1">
                 <span className="text-muted-foreground mb-1 block text-xs">
-                  Phone *
+                  {t('admin.quotes.phoneLabel')} *
                 </span>
                 <input
                   type="text"
@@ -122,7 +124,7 @@ export function QuoteDetailDialog({
               </div>
               <div>
                 <span className="text-muted-foreground mb-1 block text-xs">
-                  Date
+                  {t('admin.quotes.dateLabel')}
                 </span>
                 <p className="py-1.5 text-sm tabular-nums">
                   {new Date(quote.createdAt).toLocaleDateString()}
@@ -136,7 +138,7 @@ export function QuoteDetailDialog({
                 className="h-8"
               >
                 <Pencil className="size-3.5" />
-                Update
+                {t('common.update')}
               </Button>
             </div>
 
@@ -145,9 +147,11 @@ export function QuoteDetailDialog({
               className="space-y-5 rounded-lg bg-white p-6 text-black"
             >
               <div className="text-center">
-                <h2 className="text-xl font-bold tracking-tight">PC Quote</h2>
+                <h2 className="text-xl font-bold tracking-tight">
+                  {t('build.quoteTitle')}
+                </h2>
                 <p className="mt-0.5 text-sm text-gray-500">
-                  Client: {quote.clientName}
+                  {t('admin.quotes.clientLabel')}: {quote.clientName}
                 </p>
                 <p className="text-xs text-gray-400">
                   {new Date(quote.createdAt).toLocaleDateString()}
@@ -158,16 +162,20 @@ export function QuoteDetailDialog({
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-black">Component</TableHead>
-                      <TableHead className="text-black">Category</TableHead>
-                      <TableHead className="text-right text-black">
-                        Qty
+                      <TableHead className="text-black">
+                        {t('build.component')}
+                      </TableHead>
+                      <TableHead className="text-black">
+                        {t('build.category')}
                       </TableHead>
                       <TableHead className="text-right text-black">
-                        Price
+                        {t('build.qty')}
                       </TableHead>
                       <TableHead className="text-right text-black">
-                        Subtotal
+                        {t('build.unitPriceLabel')}
+                      </TableHead>
+                      <TableHead className="text-right text-black">
+                        {t('build.subtotal')}
                       </TableHead>
                     </TableRow>
                   </TableHeader>
@@ -197,14 +205,16 @@ export function QuoteDetailDialog({
 
               <div className="space-y-1.5 border-t pt-3 text-sm text-black">
                 <div className="flex items-center justify-between">
-                  <span>Subtotal</span>
+                  <span>{t('build.quoteSubtotal')}</span>
                   <span className="tabular-nums">
                     ${quote.subtotal.toFixed(2)}
                   </span>
                 </div>
                 {quote.discount > 0 && (
                   <div className="flex items-center justify-between text-gray-500">
-                    <span>Discount ({quote.discount}%)</span>
+                    <span>
+                      {t('build.quoteDiscount', { pct: quote.discount })}
+                    </span>
                     <span className="tabular-nums">
                       -$
                       {(quote.subtotal * (quote.discount / 100)).toFixed(2)}
@@ -212,7 +222,7 @@ export function QuoteDetailDialog({
                   </div>
                 )}
                 <div className="flex items-center justify-between text-base font-semibold">
-                  <span>Total</span>
+                  <span>{t('build.quoteTotal')}</span>
                   <span className="tabular-nums">
                     ${quote.finalTotal.toFixed(2)}
                   </span>
@@ -220,18 +230,18 @@ export function QuoteDetailDialog({
               </div>
 
               <p className="text-center text-xs text-gray-400">
-                This quote is valid for 30 days.
+                {t('build.validPeriod')}
               </p>
             </div>
 
             <div className="flex justify-end gap-2">
               <Button variant="outline" size="sm" onClick={handlePrint}>
                 <Printer className="size-4" />
-                Print
+                {t('common.print')}
               </Button>
               <Button size="sm" onClick={downloadQuote}>
                 <Download className="size-4" />
-                Download Image
+                {t('common.downloadImage')}
               </Button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import html2canvas from 'html2canvas-pro'
 import { toast } from 'sonner'
 import { useStore } from '@/hooks/use-store'
@@ -14,6 +15,7 @@ export const Route = createFileRoute('/build')({
 })
 
 function BuildPage() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { categories, products, getCategoryName, saveQuote } = useStore()
   const [selected, setSelected] = useState<Map<string, LineItem>>(new Map())
@@ -117,10 +119,10 @@ function BuildPage() {
       discount,
       finalTotal,
     })
-    toast.success('Quote saved', {
+    toast.success(t('build.quoteSaved'), {
       duration: 5000,
       action: {
-        label: 'View Quotes',
+        label: t('build.viewQuotes'),
         onClick: () => navigate({ to: '/admin/quotes' }),
       },
     })
@@ -137,10 +139,10 @@ function BuildPage() {
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Build Your PC</h1>
-          <p className="text-muted-foreground mt-1">
-            Select components to build your custom configuration.
-          </p>
+          <h1 className="text-3xl font-bold tracking-tight">
+            {t('build.title')}
+          </h1>
+          <p className="text-muted-foreground mt-1">{t('build.subtitle')}</p>
         </div>
       </div>
 
@@ -149,9 +151,7 @@ function BuildPage() {
       <div className="flex flex-col gap-8 lg:flex-row">
         <div className="flex-1 space-y-4">
           {nonEmptyCategories.length === 0 ? (
-            <p className="text-muted-foreground">
-              No products available. Add some in the admin panel first.
-            </p>
+            <p className="text-muted-foreground">{t('build.noProducts')}</p>
           ) : (
             nonEmptyCategories.map((cat, i) => {
               const catProducts = products.filter(

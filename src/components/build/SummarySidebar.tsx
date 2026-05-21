@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   ShoppingCart,
   Trash2,
@@ -34,6 +35,7 @@ export function SummarySidebar({
   onDiscountChange,
   onGenerateQuote,
 }: Props) {
+  const { t } = useTranslation()
   const itemCount = selectedList.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
@@ -41,10 +43,10 @@ export function SummarySidebar({
       <div className="bg-card border-border rounded-lg border lg:sticky lg:top-8">
         <div className="flex items-center gap-2 border-b px-4 py-3">
           <ShoppingCart className="text-muted-foreground size-4" />
-          <span className="text-sm font-semibold">Summary</span>
+          <span className="text-sm font-semibold">{t('build.summary')}</span>
           {hasSelection && (
             <span className="bg-accent/10 text-accent ml-auto rounded-md px-1.5 py-0.5 text-xs font-medium">
-              {itemCount} item{itemCount !== 1 ? 's' : ''}
+              {t('build.items', { count: itemCount })}
             </span>
           )}
         </div>
@@ -52,7 +54,7 @@ export function SummarySidebar({
         <div className="p-4">
           {!hasSelection ? (
             <p className="text-muted-foreground py-6 text-center text-xs">
-              No components selected yet.
+              {t('build.noComponents')}
             </p>
           ) : (
             <div className="space-y-3">
@@ -116,14 +118,16 @@ export function SummarySidebar({
 
               <div className="space-y-2 border-t pt-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-muted-foreground">
+                    {t('build.subtotal')}
+                  </span>
                   <span className="tabular-nums">${subtotal.toFixed(2)}</span>
                 </div>
 
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-muted-foreground flex items-center gap-1 text-sm">
                     <Percent className="size-3" />
-                    Discount
+                    {t('build.discount')}
                   </span>
                   <div className="flex items-center gap-1">
                     <input
@@ -146,7 +150,7 @@ export function SummarySidebar({
                 </div>
 
                 <div className="flex items-center justify-between text-sm font-semibold">
-                  <span>Total</span>
+                  <span>{t('build.total')}</span>
                   <span className="text-accent tabular-nums">
                     ${finalTotal.toFixed(2)}
                   </span>
@@ -155,7 +159,7 @@ export function SummarySidebar({
 
               <Button className="w-full" size="sm" onClick={onGenerateQuote}>
                 <MonitorSmartphone className="size-4" />
-                Generate Quote
+                {t('build.generateQuote')}
               </Button>
             </div>
           )}

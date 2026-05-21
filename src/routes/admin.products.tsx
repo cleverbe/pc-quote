@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -24,6 +25,7 @@ export const Route = createFileRoute('/admin/products')({
 const PAGE_SIZE = 10
 
 function ProductsPage() {
+  const { t } = useTranslation()
   const {
     products,
     categories,
@@ -76,10 +78,10 @@ function ProductsPage() {
   ) {
     if (editing) {
       updateProduct(editing.id, name, description, price, categoryId)
-      toast.success('Product updated')
+      toast.success(t('admin.products.updatedToast'))
     } else {
       addProduct(name, description, price, categoryId)
-      toast.success('Product created')
+      toast.success(t('admin.products.createdToast'))
     }
     setOpen(false)
     setEditing(null)
@@ -88,7 +90,9 @@ function ProductsPage() {
   function handleDelete(id: string) {
     const product = products.find((p) => p.id === id)
     deleteProduct(id)
-    toast.success(`Product "${product?.name ?? ''}" deleted`)
+    toast.success(
+      t('admin.products.deletedToast', { name: product?.name ?? '' }),
+    )
   }
 
   function openDialog(product: Product | null) {
@@ -99,10 +103,10 @@ function ProductsPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Products</h1>
+        <h1 className="text-2xl font-bold">{t('admin.products.title')}</h1>
         <Button onClick={() => openDialog(null)}>
           <Plus className="size-4" />
-          Add Product
+          {t('admin.products.addProduct')}
         </Button>
       </div>
 
@@ -111,15 +115,17 @@ function ProductsPage() {
           <SearchInput
             value={search}
             onChange={handleSearch}
-            placeholder="Search products by name..."
+            placeholder={t('admin.products.searchPlaceholder')}
           />
         </div>
         <Select value={categoryFilter} onValueChange={handleCategoryFilter}>
           <SelectTrigger className="w-44">
-            <SelectValue placeholder="All categories" />
+            <SelectValue placeholder={t('admin.products.allCategories')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All categories</SelectItem>
+            <SelectItem value="all">
+              {t('admin.products.allCategories')}
+            </SelectItem>
             {categories.map((cat) => (
               <SelectItem key={cat.id} value={cat.id}>
                 {cat.name}
@@ -132,8 +138,8 @@ function ProductsPage() {
       {filtered.length === 0 ? (
         <p className="text-muted-foreground py-8 text-center text-sm">
           {query || categoryFilter !== 'all'
-            ? 'No products match your criteria.'
-            : 'No products yet. Create categories first, then add products.'}
+            ? t('admin.products.noSearchResults')
+            : t('admin.products.noProducts')}
         </p>
       ) : (
         <>

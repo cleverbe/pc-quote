@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -17,6 +18,7 @@ export const Route = createFileRoute('/admin/categories')({
 const PAGE_SIZE = 10
 
 function CategoriesPage() {
+  const { t } = useTranslation()
   const { categories, addCategory, updateCategory, deleteCategory } = useStore()
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState<Category | null>(null)
@@ -45,10 +47,10 @@ function CategoriesPage() {
   function handleSave(name: string, description: string) {
     if (editing) {
       updateCategory(editing.id, name, description)
-      toast.success('Category updated')
+      toast.success(t('admin.categories.updatedToast'))
     } else {
       addCategory(name, description)
-      toast.success('Category created')
+      toast.success(t('admin.categories.createdToast'))
     }
     setOpen(false)
     setEditing(null)
@@ -57,7 +59,7 @@ function CategoriesPage() {
   function handleDelete(id: string) {
     const cat = categories.find((c) => c.id === id)
     deleteCategory(id)
-    toast.success(`Category "${cat?.name ?? ''}" deleted`)
+    toast.success(t('admin.categories.deletedToast', { name: cat?.name ?? '' }))
   }
 
   function openDialog(cat: Category | null) {
@@ -68,24 +70,24 @@ function CategoriesPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Categories</h1>
+        <h1 className="text-2xl font-bold">{t('admin.categories.title')}</h1>
         <Button onClick={() => openDialog(null)}>
           <Plus className="size-4" />
-          Add Category
+          {t('admin.categories.addCategory')}
         </Button>
       </div>
 
       <SearchInput
         value={search}
         onChange={handleSearch}
-        placeholder="Search categories by name..."
+        placeholder={t('admin.categories.searchPlaceholder')}
       />
 
       {filtered.length === 0 ? (
         <p className="text-muted-foreground py-8 text-center text-sm">
           {query
-            ? 'No categories match your search.'
-            : 'No categories yet. Create your first one.'}
+            ? t('admin.categories.noSearchResults')
+            : t('admin.categories.noCategories')}
         </p>
       ) : (
         <>

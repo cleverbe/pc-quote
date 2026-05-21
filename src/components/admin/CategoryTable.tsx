@@ -1,4 +1,5 @@
 import { Pencil, Trash2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import {
   Table,
@@ -18,19 +19,24 @@ interface Props {
 }
 
 export function CategoryTable({ categories, onEdit, onDelete }: Props) {
+  const { t } = useTranslation()
   const [confirmId, setConfirmId] = useState<string | null>(null)
 
   return (
     <div className="bg-card border-border rounded-lg border">
       <div className="border-border border-b px-5 py-3">
-        <h3 className="text-sm font-semibold">All Categories</h3>
+        <h3 className="text-sm font-semibold">
+          {t('admin.categories.tableTitle')}
+        </h3>
       </div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead className="w-24">Actions</TableHead>
+            <TableHead>{t('admin.categories.name')}</TableHead>
+            <TableHead>{t('admin.categories.description')}</TableHead>
+            <TableHead className="w-24">
+              {t('admin.categories.actions')}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
