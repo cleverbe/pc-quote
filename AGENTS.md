@@ -9,6 +9,9 @@
 - `npm run lint` — ESLint on all files
 - `npm run format` — Prettier on `src/**/*.{ts,tsx,css,json}`
 - `npm run prepare` — Husky install (runs automatically on `npm install`)
+- `docker compose up -d` — Start dev server in Docker (port 5173)
+- `docker compose up -d --build` — Rebuild and restart containers
+- `docker compose down` — Stop containers
 
 Pre-commit: Husky runs `lint-staged` → `eslint --fix` + `prettier --write` on staged `.ts,.tsx` files.
 
@@ -50,8 +53,10 @@ See `.interface-design/system.md` for the full design system. Key points:
 
 ```
 src/types/index.ts
-  Category { id, name, description, createdAt }
-  Product  { id, name, description, price, categoryId, createdAt }
+  Category   { id, name, description, createdAt }
+  Product    { id, name, description, price, categoryId, createdAt }
+  LineItem   { product: Product; quantity: number }
+  SavedQuote { id, clientName, clientPhone, createdAt, items: LineItem[], subtotal, discount, finalTotal }
 ```
 
 ## Store API
@@ -62,6 +67,8 @@ src/types/index.ts
 - `addCategory(name, description)`, `updateCategory(id, name, desc)`, `deleteCategory(id)`
 - `addProduct(name, desc, price, catId)`, `updateProduct(id, name, desc, price, catId)`, `deleteProduct(id)`
 - `getCategoryName(id)` → string, `getProductsByCategory(catId)` → Product[]
+- `savedQuotes` — array of SavedQuote
+- `saveQuote(data)`, `updateQuote(id, data)`, `deleteQuote(id)`
 
 ## Current routes
 
@@ -74,10 +81,11 @@ src/types/index.ts
 | `src/routes/admin.categories.tsx` | `/admin/categories`                               |
 | `src/routes/admin.products.tsx`   | `/admin/products`                                 |
 | `src/routes/build.tsx`            | `/build`                                          |
+| `src/routes/admin.quotes.tsx`     | `/admin/quotes`                                   |
 
 ## Quirks / gotchas
 
-- No test runner installed. No CI. No Docker.
+- No test runner installed. No CI.
 - `tsc -b` uses project references (`tsconfig.app.json` + `tsconfig.node.json`). If you add a new tsconfig, register it in the root `tsconfig.json` references array.
 - The app is entirely client-side. No API calls, no backend. All data lives in React state and resets on refresh.
 - Seed data is defined inline in `src/stores/StoreProvider.tsx` as `initialCategories[]` and `initialProducts[]`.

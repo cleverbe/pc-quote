@@ -27,6 +27,17 @@ npm run format     # Format code with Prettier
 npm run preview    # Preview production build
 ```
 
+### Docker
+
+```bash
+docker compose up -d          # Start dev server in container (http://localhost:5173)
+docker compose up -d --build  # Rebuild and restart after config changes
+docker compose down           # Stop containers
+docker compose logs -f        # Follow logs
+```
+
+The dev server inside the container listens on `0.0.0.0:5173` (configured in `vite.config.ts`).
+
 ## Pre-commit Hooks
 
 On every commit, Husky runs **lint-staged** — ESLint + Prettier on staged files.
@@ -35,9 +46,15 @@ On every commit, Husky runs **lint-staged** — ESLint + Prettier on staged file
 
 ```
 src/
-├── components/ui/   # shadcn/ui components
-├── lib/             # Utilities and store context
+├── components/
+│   ├── admin/       # Admin page components (tables, dialogs)
+│   ├── build/       # Build page components (filters, cards, sidebar)
+│   └── ui/          # shadcn/ui primitives
+├── context/         # React context definitions
+├── hooks/           # Custom hooks (use-store)
+├── lib/             # Utilities (print-quote, cn)
 ├── routes/          # TanStack Router file-based routes
+├── stores/          # StoreProvider with seed data
 ├── types/           # TypeScript interfaces
 ├── index.css        # Tailwind imports and theme tokens
 └── main.tsx         # App entry point
