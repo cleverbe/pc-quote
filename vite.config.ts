@@ -5,10 +5,17 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import path from 'path'
 
 export default defineConfig({
-  plugins: [TanStackRouterVite({ target: 'react', autoCodeSplitting: true }), react(), tailwindcss()],
+  plugins: [
+    TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
+    react(),
+    tailwindcss(),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+  },
+  server: {
+    host: '0.0.0.0',
   },
 })
