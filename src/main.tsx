@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { StoreProvider } from '@/lib/store'
+import { StoreProvider } from '@/stores/StoreProvider'
 import { routeTree } from './routeTree.gen'
 import './index.css'
 

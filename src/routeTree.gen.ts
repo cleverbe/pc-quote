@@ -9,12 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as BuildRouteImport } from './routes/build'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminQuotesRouteImport } from './routes/admin.quotes'
 import { Route as AdminProductsRouteImport } from './routes/admin.products'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 
+const BuildRoute = BuildRouteImport.update({
+  id: '/build',
+  path: '/build',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -28,6 +35,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQuotesRoute = AdminQuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminProductsRoute = AdminProductsRouteImport.update({
@@ -44,22 +56,28 @@ const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/build': typeof BuildRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/quotes': typeof AdminQuotesRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/build': typeof BuildRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/quotes': typeof AdminQuotesRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/build': typeof BuildRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/quotes': typeof AdminQuotesRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -67,27 +85,45 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/build'
     | '/admin/categories'
     | '/admin/products'
+    | '/admin/quotes'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin/categories' | '/admin/products' | '/admin'
+  to:
+    | '/'
+    | '/build'
+    | '/admin/categories'
+    | '/admin/products'
+    | '/admin/quotes'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/build'
     | '/admin/categories'
     | '/admin/products'
+    | '/admin/quotes'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  BuildRoute: typeof BuildRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/build': {
+      id: '/build'
+      path: '/build'
+      fullPath: '/build'
+      preLoaderRoute: typeof BuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -107,6 +143,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/quotes': {
+      id: '/admin/quotes'
+      path: '/quotes'
+      fullPath: '/admin/quotes'
+      preLoaderRoute: typeof AdminQuotesRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/products': {
@@ -129,12 +172,14 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminProductsRoute: typeof AdminProductsRoute
+  AdminQuotesRoute: typeof AdminQuotesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminProductsRoute: AdminProductsRoute,
+  AdminQuotesRoute: AdminQuotesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
@@ -143,6 +188,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  BuildRoute: BuildRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

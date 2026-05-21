@@ -1,31 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
-import type { Category, Product } from '@/types'
-
-interface StoreContext {
-  categories: Category[]
-  products: Product[]
-  addCategory: (name: string, description: string) => void
-  updateCategory: (id: string, name: string, description: string) => void
-  deleteCategory: (id: string) => void
-  addProduct: (
-    name: string,
-    description: string,
-    price: number,
-    categoryId: string,
-  ) => void
-  updateProduct: (
-    id: string,
-    name: string,
-    description: string,
-    price: number,
-    categoryId: string,
-  ) => void
-  deleteProduct: (id: string) => void
-  getCategoryName: (id: string) => string
-  getProductsByCategory: (categoryId: string) => Product[]
-}
-
-const StoreContext = createContext<StoreContext | null>(null)
+import { useState, type ReactNode } from 'react'
+import { StoreContext } from '../context/store-context'
+import type { Category, Product, SavedQuote } from '@/types'
 
 function generateId() {
   return (
@@ -93,6 +68,12 @@ const initialCategories: Category[] = [
     id: 'cat-monitor',
     name: 'Monitores',
     description: 'Monitores LCD, LED y gaming',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'cat-otros',
+    name: 'Otros',
+    description: 'Accesorios, refrigeración, ventiladores y otros componentes',
     createdAt: '2025-01-01T00:00:00.000Z',
   },
 ]
@@ -485,11 +466,171 @@ const initialProducts: Product[] = [
     categoryId: 'cat-monitor',
     createdAt: '2025-01-01T00:00:00.000Z',
   },
+
+  // Otros / Accesorios
+  {
+    id: 'prod-cooler-air',
+    name: 'Noctua NH-D15',
+    description: 'Disipador de aire doble torre, 140mm, silencioso',
+    price: 109.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-cooler-aio',
+    name: 'Corsair H150i Elite Capellix',
+    description: 'Refrigeración líquida AIO 360mm, RGB',
+    price: 179.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-thermal-paste',
+    name: 'Arctic MX-6',
+    description: 'Pasta térmica 4g, alta conductividad',
+    price: 12.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-fans-3pack',
+    name: 'Noctua NF-A12x25 PWM 3-Pack',
+    description: 'Ventiladores 120mm, PWM, cromax.black',
+    price: 89.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-cable-ext',
+    name: 'CableMod Pro Kit Sleeved Cables',
+    description: 'Kit de extensiones de cables, color negro',
+    price: 49.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-usb-hub',
+    name: 'Anker PowerExpand 10-in-1',
+    description: 'Hub USB-C con HDMI, USB-A, SD, PD 100W',
+    price: 54.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-wifi-card',
+    name: 'TP-Link Archer TX50E',
+    description: 'Tarjeta WiFi 6 PCIe, Bluetooth 5.0',
+    price: 49.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-sound-card',
+    name: 'Creative Sound BlasterX AE-5',
+    description: 'Tarjeta de sonido PCIe, DAC 32-bit, RGB',
+    price: 149.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-rgb-strip',
+    name: 'Corsair iCUE LS100 Smart Lighting',
+    description: 'Tira LED RGB direccionable, 450mm, Starter Kit',
+    price: 69.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+  {
+    id: 'prod-anti-static',
+    name: 'iFixit Anti-Static Wrist Strap',
+    description: 'Muñequera antiestática con pinza de conexión',
+    price: 9.99,
+    categoryId: 'cat-otros',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+]
+
+const initialQuotes: SavedQuote[] = [
+  {
+    id: 'quote-1',
+    clientName: 'Carlos Mendoza',
+    clientPhone: '555-0101',
+    createdAt: '2026-05-15T10:30:00.000Z',
+    items: [
+      {
+        product: initialProducts.find((p) => p.id === 'prod-r7-7800x3d')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-ram-32-d5')!,
+        quantity: 2,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-mobo-x670e')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-gpu-4070s')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-ssd-2tb')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-psu-850')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-case-4000d')!,
+        quantity: 1,
+      },
+    ],
+    subtotal: 2204.92,
+    discount: 10,
+    finalTotal: 1984.43,
+  },
+  {
+    id: 'quote-2',
+    clientName: 'Ana López',
+    clientPhone: '555-0202',
+    createdAt: '2026-05-18T14:00:00.000Z',
+    items: [
+      {
+        product: initialProducts.find((p) => p.id === 'prod-i5-14600k')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-ram-32-d4')!,
+        quantity: 2,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-mobo-b760')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-gpu-4060')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-ssd-1tb')!,
+        quantity: 1,
+      },
+      {
+        product: initialProducts.find((p) => p.id === 'prod-psu-750')!,
+        quantity: 1,
+      },
+    ],
+    subtotal: 1153.93,
+    discount: 5,
+    finalTotal: 1096.23,
+  },
 ]
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [categories, setCategories] = useState<Category[]>(initialCategories)
   const [products, setProducts] = useState<Product[]>(initialProducts)
+  const [savedQuotes, setSavedQuotes] = useState<SavedQuote[]>(initialQuotes)
 
   function addCategory(name: string, description: string) {
     const cat: Category = {
@@ -554,11 +695,34 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return products.filter((p) => p.categoryId === categoryId)
   }
 
+  function saveQuote(data: Omit<SavedQuote, 'id' | 'createdAt'>) {
+    const quote: SavedQuote = {
+      ...data,
+      id: generateId(),
+      createdAt: new Date().toISOString(),
+    }
+    setSavedQuotes((prev) => [quote, ...prev])
+  }
+
+  function deleteQuote(id: string) {
+    setSavedQuotes((prev) => prev.filter((q) => q.id !== id))
+  }
+
+  function updateQuote(
+    id: string,
+    data: Partial<Pick<SavedQuote, 'clientName' | 'clientPhone'>>,
+  ) {
+    setSavedQuotes((prev) =>
+      prev.map((q) => (q.id === id ? { ...q, ...data } : q)),
+    )
+  }
+
   return (
     <StoreContext.Provider
       value={{
         categories,
         products,
+        savedQuotes,
         addCategory,
         updateCategory,
         deleteCategory,
@@ -567,15 +731,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         deleteProduct,
         getCategoryName,
         getProductsByCategory,
+        saveQuote,
+        updateQuote,
+        deleteQuote,
       }}
     >
       {children}
     </StoreContext.Provider>
   )
-}
-
-export function useStore() {
-  const ctx = useContext(StoreContext)
-  if (!ctx) throw new Error('useStore must be used within StoreProvider')
-  return ctx
 }

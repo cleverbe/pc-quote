@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# PC Quote
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Admin dashboard for building and quoting custom computer configurations. Built with React + TypeScript + Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Framework:** React 19 + TypeScript 6
+- **Bundler:** Vite 8
+- **Routing:** TanStack Router
+- **Styling:** Tailwind CSS 4 + shadcn/ui
+- **Icons:** Lucide React
+- **Notifications:** sonner
+- **Linting:** ESLint 10
+- **Formatting:** Prettier
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Local
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install        # Install dependencies
+npm run dev        # Start dev server
+npm run build      # Build for production
+npm run typecheck  # Type-check without building
+npm run lint       # Run ESLint
+npm run format     # Format code with Prettier
+npm run preview    # Preview production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Pre-commit Hooks
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+On every commit, Husky runs **lint-staged** — ESLint + Prettier on staged files.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```
+src/
+├── components/ui/   # shadcn/ui components
+├── lib/             # Utilities and store context
+├── routes/          # TanStack Router file-based routes
+├── types/           # TypeScript interfaces
+├── index.css        # Tailwind imports and theme tokens
+└── main.tsx         # App entry point
 ```

@@ -1,33 +1,46 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
-import { Package, Tags } from 'lucide-react'
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  useLocation,
+} from '@tanstack/react-router'
+import { Package, Tags, LayoutDashboard, FileText } from 'lucide-react'
 
 export const Route = createFileRoute('/admin')({
   component: AdminLayout,
 })
 
 const navItems = [
+  { to: '/admin', label: 'Overview', icon: LayoutDashboard },
   { to: '/admin/categories', label: 'Categories', icon: Tags },
   { to: '/admin/products', label: 'Products', icon: Package },
-] as const
+  { to: '/admin/quotes', label: 'Quotes', icon: FileText },
+]
 
 function AdminLayout() {
+  const { pathname } = useLocation()
+
   return (
     <div className="flex min-h-[calc(100vh-57px)]">
-      <aside className="bg-muted/30 w-56 border-r p-4">
-        <h2 className="text-muted-foreground mb-4 px-2 text-sm font-semibold">
-          Admin
-        </h2>
-        <nav className="flex flex-col gap-1">
-          {navItems.map(({ to, label, icon: Icon }) => (
-            <Link
-              key={to}
-              to={to}
-              className="hover:bg-accent [&.active]:bg-accent flex items-center gap-2 rounded-md px-2 py-1.5 text-sm [&.active]:font-medium"
-            >
-              <Icon className="size-4" />
-              {label}
-            </Link>
-          ))}
+      <aside className="w-56 border-r p-4">
+        <nav className="flex flex-col gap-0.5">
+          {navItems.map(({ to, label, icon: Icon }) => {
+            const isActive = pathname === to
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'bg-secondary text-foreground'
+                    : 'text-muted-foreground hover:bg-secondary'
+                }`}
+              >
+                <Icon className="size-4" />
+                {label}
+              </Link>
+            )
+          })}
         </nav>
       </aside>
       <main className="flex-1 p-6">
