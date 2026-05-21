@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Download, Save } from 'lucide-react'
+import { Download, Save, Printer } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { printQuote } from '@/lib/print-quote'
 import {
   Dialog,
   DialogContent,
@@ -47,6 +48,18 @@ export function QuoteDialog({
 
   const discountAmount = subtotal * (discount / 100)
   const canSave = clientName.trim().length > 0 && clientPhone.trim().length > 0
+
+  function handlePrint() {
+    printQuote({
+      items: selectedList,
+      clientName: clientName.trim() || 'N/A',
+      clientDate: new Date().toLocaleDateString(),
+      subtotal,
+      discount,
+      finalTotal,
+      getCategoryName,
+    })
+  }
 
   function handleSave() {
     if (!canSave) return
@@ -178,6 +191,10 @@ export function QuoteDialog({
           </div>
 
           <div className="flex justify-end gap-2">
+            <Button variant="outline" size="sm" onClick={handlePrint}>
+              <Printer className="size-4" />
+              Print
+            </Button>
             <Button size="sm" onClick={onDownload}>
               <Download className="size-4" />
               Download Image

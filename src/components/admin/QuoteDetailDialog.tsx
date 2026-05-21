@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react'
 import html2canvas from 'html2canvas-pro'
-import { Pencil, Download } from 'lucide-react'
+import { Pencil, Download, Printer } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { printQuote } from '@/lib/print-quote'
 import {
   Dialog,
   DialogContent,
@@ -49,6 +50,19 @@ export function QuoteDetailDialog({
       clientPhone: editingPhone.trim(),
     })
     toast.success('Client info updated')
+  }
+
+  function handlePrint() {
+    if (!quote) return
+    printQuote({
+      items: quote.items,
+      clientName: editingName.trim() || quote.clientName,
+      clientDate: new Date(quote.createdAt).toLocaleDateString(),
+      subtotal: quote.subtotal,
+      discount: quote.discount,
+      finalTotal: quote.finalTotal,
+      getCategoryName,
+    })
   }
 
   async function downloadQuote() {
@@ -210,7 +224,11 @@ export function QuoteDetailDialog({
               </p>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" size="sm" onClick={handlePrint}>
+                <Printer className="size-4" />
+                Print
+              </Button>
               <Button size="sm" onClick={downloadQuote}>
                 <Download className="size-4" />
                 Download Image
