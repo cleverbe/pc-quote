@@ -12,6 +12,7 @@ export interface Product {
   price: number
   categoryId: string
   createdAt: string
+  state: boolean
 }
 
 export interface LineItem {

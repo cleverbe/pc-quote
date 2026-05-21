@@ -65,7 +65,9 @@ function BuildPage() {
 
   const nonEmptyCategories = useMemo(
     () =>
-      categories.filter((cat) => products.some((p) => p.categoryId === cat.id)),
+      categories.filter((cat) =>
+        products.some((p) => p.categoryId === cat.id && p.state),
+      ),
     [categories, products],
   )
 
@@ -155,7 +157,7 @@ function BuildPage() {
           ) : (
             nonEmptyCategories.map((cat, i) => {
               const catProducts = products.filter(
-                (p) => p.categoryId === cat.id && matchesSearch(p),
+                (p) => p.categoryId === cat.id && p.state && matchesSearch(p),
               )
               return (
                 <ProductSection

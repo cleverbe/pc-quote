@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { useStore } from '@/hooks/use-store'
-import { Package, Tags } from 'lucide-react'
+import { Package, Tags, FileText } from 'lucide-react'
 
 export const Route = createFileRoute('/admin/')({
   component: AdminDashboard,
@@ -9,7 +9,7 @@ export const Route = createFileRoute('/admin/')({
 
 function AdminDashboard() {
   const { t } = useTranslation()
-  const { categories, products } = useStore()
+  const { categories, products, savedQuotes } = useStore()
 
   return (
     <div className="space-y-6">
@@ -21,7 +21,7 @@ function AdminDashboard() {
           {t('admin.dashboard.subtitle')}
         </p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-3">
         <Link to="/admin/categories" className="group block">
           <div className="bg-card hover:bg-secondary border-border rounded-lg border p-5 transition-colors">
             <div className="flex items-start justify-between">
@@ -59,6 +59,26 @@ function AdminDashboard() {
             </div>
             <p className="text-muted-foreground mt-3 text-xs">
               {t('admin.dashboard.manageProducts')}
+            </p>
+          </div>
+        </Link>
+        <Link to="/admin/quotes" className="group block">
+          <div className="bg-card hover:bg-secondary border-border rounded-lg border p-5 transition-colors">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-muted-foreground text-sm font-medium">
+                  {t('admin.dashboard.quotes')}
+                </p>
+                <p className="mt-1 text-3xl font-semibold tracking-tight">
+                  {savedQuotes.length}
+                </p>
+              </div>
+              <div className="bg-primary/10 text-primary flex size-9 items-center justify-center rounded-lg">
+                <FileText className="size-4.5" />
+              </div>
+            </div>
+            <p className="text-muted-foreground mt-3 text-xs">
+              {t('admin.dashboard.manageQuotes')}
             </p>
           </div>
         </Link>

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/lib/utils'
 import {
   Select,
   SelectContent,
@@ -30,6 +31,7 @@ interface Props {
     description: string,
     price: number,
     categoryId: string,
+    state: boolean,
   ) => void
 }
 
@@ -47,6 +49,7 @@ function ProductForm({
   const [desc, setDesc] = useState(editing?.description ?? '')
   const [price, setPrice] = useState(editing?.price.toString() ?? '')
   const [categoryId, setCategoryId] = useState(editing?.categoryId ?? '')
+  const [state, setState] = useState(editing?.state ?? true)
 
   return (
     <div className="space-y-4">
@@ -99,6 +102,26 @@ function ProductForm({
           placeholder={t('admin.products.descPlaceholder')}
         />
       </div>
+      <div className="flex items-center justify-between">
+        <Label>{t('admin.products.stateLabel')}</Label>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={state}
+          className={cn(
+            'relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border transition-colors',
+            state ? 'bg-primary border-primary' : 'bg-input border-border',
+          )}
+          onClick={() => setState(!state)}
+        >
+          <span
+            className={cn(
+              'inline-block size-5 rounded-full bg-white shadow-sm transition-transform',
+              state ? 'translate-x-[22px]' : 'translate-x-px',
+            )}
+          />
+        </button>
+      </div>
       <div className="flex justify-end gap-2">
         <DialogClose asChild>
           <Button variant="outline" type="button">
@@ -107,7 +130,7 @@ function ProductForm({
         </DialogClose>
         <Button
           onClick={() =>
-            onSave(name, desc, Number.parseFloat(price), categoryId)
+            onSave(name, desc, Number.parseFloat(price), categoryId, state)
           }
         >
           {t('common.save')}

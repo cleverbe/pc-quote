@@ -75,12 +75,13 @@ function ProductsPage() {
     description: string,
     price: number,
     categoryId: string,
+    state: boolean,
   ) {
     if (editing) {
-      updateProduct(editing.id, name, description, price, categoryId)
+      updateProduct(editing.id, name, description, price, categoryId, state)
       toast.success(t('admin.products.updatedToast'))
     } else {
-      addProduct(name, description, price, categoryId)
+      addProduct(name, description, price, categoryId, state)
       toast.success(t('admin.products.createdToast'))
     }
     setOpen(false)

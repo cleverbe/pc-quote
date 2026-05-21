@@ -13,6 +13,7 @@ export interface StoreContextValue {
     description: string,
     price: number,
     categoryId: string,
+    state?: boolean,
   ) => void
   updateProduct: (
     id: string,
@@ -20,6 +21,7 @@ export interface StoreContextValue {
     description: string,
     price: number,
     categoryId: string,
+    state: boolean,
   ) => void
   deleteProduct: (id: string) => void
   getCategoryName: (id: string) => string

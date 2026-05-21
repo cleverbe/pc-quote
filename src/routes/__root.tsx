@@ -1,15 +1,10 @@
 import { useState } from 'react'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 import { Toaster } from 'sonner'
-import {
-  MonitorSmartphone,
-  Wrench,
-  Store,
-  Languages,
-  Menu,
-  X,
-} from 'lucide-react'
+import { MonitorSmartphone, Wrench, Store, Menu, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { LanguageToggle } from '@/components/LanguageToggle'
+import { UserAvatar } from '@/components/UserAvatar'
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -65,8 +60,9 @@ function RootLayout() {
             </Link>
           </nav>
 
-          <div className="hidden md:block">
+          <div className="ml-auto hidden items-center gap-2 md:flex">
             <LanguageToggle />
+            <UserAvatar />
           </div>
         </div>
       </header>
@@ -101,7 +97,8 @@ function RootLayout() {
               <Store className="size-4" />
               {t('nav.admin')}
             </Link>
-            <div className="mt-auto border-t pt-3">
+            <div className="mt-auto space-y-2 border-t pt-3">
+              <UserAvatar />
               <LanguageToggle />
             </div>
           </nav>
@@ -111,24 +108,5 @@ function RootLayout() {
       <Outlet />
       <Toaster richColors position="bottom-right" />
     </>
-  )
-}
-
-function LanguageToggle() {
-  const { i18n } = useTranslation()
-
-  function toggle() {
-    i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      className="text-muted-foreground hover:text-foreground flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium transition-colors"
-    >
-      <Languages className="size-3.5" />
-      {i18n.language === 'en' ? 'ES' : 'EN'}
-    </button>
   )
 }

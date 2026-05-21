@@ -43,6 +43,9 @@ export function ProductTable({
             <TableHead>{t('admin.products.category')}</TableHead>
             <TableHead>{t('admin.products.price')}</TableHead>
             <TableHead>{t('admin.products.description')}</TableHead>
+            <TableHead className="w-20 text-center">
+              {t('admin.products.state')}
+            </TableHead>
             <TableHead className="w-24">
               {t('admin.products.actions')}
             </TableHead>
@@ -62,6 +65,16 @@ export function ProductTable({
               </TableCell>
               <TableCell className="text-muted-foreground max-w-xs truncate">
                 {product.description || '—'}
+              </TableCell>
+              <TableCell className="text-center">
+                <Badge
+                  variant={product.state ? 'default' : 'secondary'}
+                  className="font-normal"
+                >
+                  {product.state
+                    ? t('admin.products.active')
+                    : t('admin.products.inactive')}
+                </Badge>
               </TableCell>
               <TableCell>
                 <div className="flex gap-1">

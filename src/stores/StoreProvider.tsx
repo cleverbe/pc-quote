@@ -87,6 +87,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-i5-14600k',
@@ -95,6 +96,7 @@ const initialProducts: Product[] = [
     price: 319.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-i7-14700k',
@@ -103,6 +105,7 @@ const initialProducts: Product[] = [
     price: 449.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-i9-14900k',
@@ -111,6 +114,7 @@ const initialProducts: Product[] = [
     price: 649.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-r5-7600',
@@ -119,6 +123,7 @@ const initialProducts: Product[] = [
     price: 229.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-r7-7800x3d',
@@ -127,6 +132,7 @@ const initialProducts: Product[] = [
     price: 449.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-r9-7950x',
@@ -135,6 +141,7 @@ const initialProducts: Product[] = [
     price: 799.99,
     categoryId: 'cat-cpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Memorias RAM
@@ -145,6 +152,7 @@ const initialProducts: Product[] = [
     price: 94.99,
     categoryId: 'cat-ram',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-ram-32-d5',
@@ -153,6 +161,7 @@ const initialProducts: Product[] = [
     price: 164.99,
     categoryId: 'cat-ram',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-ram-64-d5',
@@ -161,6 +170,7 @@ const initialProducts: Product[] = [
     price: 329.99,
     categoryId: 'cat-ram',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-ram-16-d4',
@@ -169,6 +179,7 @@ const initialProducts: Product[] = [
     price: 54.99,
     categoryId: 'cat-ram',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-ram-32-d4',
@@ -177,6 +188,7 @@ const initialProducts: Product[] = [
     price: 94.99,
     categoryId: 'cat-ram',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Placas Madre
@@ -187,6 +199,7 @@ const initialProducts: Product[] = [
     price: 429.99,
     categoryId: 'cat-mobo',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mobo-b760',
@@ -195,6 +208,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-mobo',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mobo-x670e',
@@ -203,6 +217,7 @@ const initialProducts: Product[] = [
     price: 499.99,
     categoryId: 'cat-mobo',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mobo-b650',
@@ -211,6 +226,7 @@ const initialProducts: Product[] = [
     price: 179.99,
     categoryId: 'cat-mobo',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Tarjetas Gráficas
@@ -221,6 +237,7 @@ const initialProducts: Product[] = [
     price: 349.99,
     categoryId: 'cat-gpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-gpu-4070s',
@@ -229,6 +246,7 @@ const initialProducts: Product[] = [
     price: 599.99,
     categoryId: 'cat-gpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-gpu-4080s',
@@ -237,6 +255,7 @@ const initialProducts: Product[] = [
     price: 999.99,
     categoryId: 'cat-gpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-gpu-4090',
@@ -245,6 +264,7 @@ const initialProducts: Product[] = [
     price: 1999.99,
     categoryId: 'cat-gpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-gpu-7900xtx',
@@ -253,6 +273,7 @@ const initialProducts: Product[] = [
     price: 849.99,
     categoryId: 'cat-gpu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Almacenamiento
@@ -263,6 +284,7 @@ const initialProducts: Product[] = [
     price: 119.99,
     categoryId: 'cat-storage',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-ssd-2tb',
@@ -271,6 +293,7 @@ const initialProducts: Product[] = [
     price: 219.99,
     categoryId: 'cat-storage',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-ssd-4tb',
@@ -279,6 +302,7 @@ const initialProducts: Product[] = [
     price: 399.99,
     categoryId: 'cat-storage',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-hdd-2tb',
@@ -287,6 +311,7 @@ const initialProducts: Product[] = [
     price: 54.99,
     categoryId: 'cat-storage',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Fuentes de Poder
@@ -297,6 +322,7 @@ const initialProducts: Product[] = [
     price: 119.99,
     categoryId: 'cat-psu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-psu-850',
@@ -305,6 +331,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-psu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-psu-1000',
@@ -313,6 +340,7 @@ const initialProducts: Product[] = [
     price: 199.99,
     categoryId: 'cat-psu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-psu-1200',
@@ -321,6 +349,7 @@ const initialProducts: Product[] = [
     price: 349.99,
     categoryId: 'cat-psu',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Gabinetes
@@ -331,6 +360,7 @@ const initialProducts: Product[] = [
     price: 104.99,
     categoryId: 'cat-case',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-case-5000d',
@@ -339,6 +369,7 @@ const initialProducts: Product[] = [
     price: 154.99,
     categoryId: 'cat-case',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-case-h7',
@@ -347,6 +378,7 @@ const initialProducts: Product[] = [
     price: 129.99,
     categoryId: 'cat-case',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-case-h9',
@@ -355,6 +387,7 @@ const initialProducts: Product[] = [
     price: 239.99,
     categoryId: 'cat-case',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Teclados
@@ -365,6 +398,7 @@ const initialProducts: Product[] = [
     price: 229.99,
     categoryId: 'cat-keyboard',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-kb-k70',
@@ -373,6 +407,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-keyboard',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-kb-womier',
@@ -381,6 +416,7 @@ const initialProducts: Product[] = [
     price: 79.99,
     categoryId: 'cat-keyboard',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-kb-keys',
@@ -389,6 +425,7 @@ const initialProducts: Product[] = [
     price: 199.99,
     categoryId: 'cat-keyboard',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Ratones
@@ -399,6 +436,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-mouse',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mouse-viper',
@@ -407,6 +445,7 @@ const initialProducts: Product[] = [
     price: 129.99,
     categoryId: 'cat-mouse',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mouse-g502',
@@ -415,6 +454,7 @@ const initialProducts: Product[] = [
     price: 159.99,
     categoryId: 'cat-mouse',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mouse-dav3',
@@ -423,6 +463,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-mouse',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Monitores
@@ -433,6 +474,7 @@ const initialProducts: Product[] = [
     price: 199.99,
     categoryId: 'cat-monitor',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mon-27-1440',
@@ -441,6 +483,7 @@ const initialProducts: Product[] = [
     price: 399.99,
     categoryId: 'cat-monitor',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mon-27-4k',
@@ -449,6 +492,7 @@ const initialProducts: Product[] = [
     price: 449.99,
     categoryId: 'cat-monitor',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mon-32-4k',
@@ -457,6 +501,7 @@ const initialProducts: Product[] = [
     price: 899.99,
     categoryId: 'cat-monitor',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-mon-34-uw',
@@ -465,6 +510,7 @@ const initialProducts: Product[] = [
     price: 799.99,
     categoryId: 'cat-monitor',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 
   // Otros / Accesorios
@@ -475,6 +521,7 @@ const initialProducts: Product[] = [
     price: 109.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-cooler-aio',
@@ -483,6 +530,7 @@ const initialProducts: Product[] = [
     price: 179.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-thermal-paste',
@@ -491,6 +539,7 @@ const initialProducts: Product[] = [
     price: 12.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-fans-3pack',
@@ -499,6 +548,7 @@ const initialProducts: Product[] = [
     price: 89.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-cable-ext',
@@ -507,6 +557,7 @@ const initialProducts: Product[] = [
     price: 49.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-usb-hub',
@@ -515,6 +566,7 @@ const initialProducts: Product[] = [
     price: 54.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-wifi-card',
@@ -523,6 +575,7 @@ const initialProducts: Product[] = [
     price: 49.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-sound-card',
@@ -531,6 +584,7 @@ const initialProducts: Product[] = [
     price: 149.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-rgb-strip',
@@ -539,6 +593,7 @@ const initialProducts: Product[] = [
     price: 69.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
   {
     id: 'prod-anti-static',
@@ -547,6 +602,7 @@ const initialProducts: Product[] = [
     price: 9.99,
     categoryId: 'cat-otros',
     createdAt: '2025-01-01T00:00:00.000Z',
+    state: true,
   },
 ]
 
@@ -657,6 +713,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     description: string,
     price: number,
     categoryId: string,
+    state: boolean = true,
   ) {
     const product: Product = {
       id: generateId(),
@@ -664,6 +721,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       description,
       price,
       categoryId,
+      state,
       createdAt: new Date().toISOString(),
     }
     setProducts((prev) => [...prev, product])
@@ -675,10 +733,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     description: string,
     price: number,
     categoryId: string,
+    state: boolean,
   ) {
     setProducts((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, name, description, price, categoryId } : p,
+        p.id === id ? { ...p, name, description, price, categoryId, state } : p,
       ),
     )
   }
