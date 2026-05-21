@@ -5,7 +5,7 @@ export interface StoreContextValue {
   categories: Category[]
   products: Product[]
   savedQuotes: SavedQuote[]
-  addCategory: (name: string, description: string) => void
+  addCategory: (name: string, description: string) => string
   updateCategory: (id: string, name: string, description: string) => void
   deleteCategory: (id: string) => void
   addProduct: (

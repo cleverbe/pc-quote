@@ -103,6 +103,8 @@ export const es: Translations = {
       stateLabel: 'Activo',
       active: 'Activo',
       inactive: 'Inactivo',
+      importExcel: 'Importar Excel',
+      importToast: '{{imported}} productos importados, {{skipped}} omitidos',
       nameRequired: 'El nombre es obligatorio',
       categoryRequired: 'La categoría es obligatoria',
       priceInvalid: 'Ingresa un precio válido mayor a 0',

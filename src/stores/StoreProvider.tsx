@@ -688,14 +688,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>(initialProducts)
   const [savedQuotes, setSavedQuotes] = useState<SavedQuote[]>(initialQuotes)
 
-  function addCategory(name: string, description: string) {
+  function addCategory(name: string, description: string): string {
+    const id = generateId()
     const cat: Category = {
-      id: generateId(),
+      id,
       name,
       description,
       createdAt: new Date().toISOString(),
     }
     setCategories((prev) => [...prev, cat])
+    return id
   }
 
   function updateCategory(id: string, name: string, description: string) {

@@ -100,6 +100,8 @@ export const en = {
       stateLabel: 'Active',
       active: 'Active',
       inactive: 'Inactive',
+      importExcel: 'Import Excel',
+      importToast: '{{imported}} products imported, {{skipped}} skipped',
       nameRequired: 'Name is required',
       categoryRequired: 'Category is required',
       priceInvalid: 'Enter a valid price greater than 0',
