@@ -114,7 +114,7 @@ export function ProductSection({
 
   return (
     <section key={category.id} className={`rounded-lg border-l-4 ${color}`}>
-      <div className="flex items-center gap-2 px-4 py-3">
+      <div className="flex flex-wrap items-center gap-2 px-4 py-3">
         <button
           type="button"
           onClick={() => onToggleCollapse(category.id)}
@@ -139,7 +139,7 @@ export function ProductSection({
           </Badge>
         )}
 
-        <div className="ml-auto flex items-center gap-1">
+        <div className="ml-auto flex w-full items-center justify-end gap-1 sm:ml-auto sm:w-auto">
           {(['name', 'price'] as const).map((field) => (
             <Button
               key={field}

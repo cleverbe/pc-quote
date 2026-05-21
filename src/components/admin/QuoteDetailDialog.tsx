@@ -99,7 +99,7 @@ export function QuoteDetailDialog({
 
         {quote && (
           <div className="space-y-4">
-            <div className="bg-secondary/50 flex items-end gap-3 rounded-lg px-4 py-3 text-sm">
+            <div className="bg-secondary/50 flex flex-col gap-3 rounded-lg px-4 py-3 text-sm sm:flex-row sm:items-end">
               <div className="flex-1">
                 <span className="text-muted-foreground mb-1 block text-xs">
                   {t('admin.quotes.clientLabel')} *
@@ -144,7 +144,7 @@ export function QuoteDetailDialog({
 
             <div
               ref={quoteRef}
-              className="space-y-5 rounded-lg bg-white p-6 text-black"
+              className="space-y-5 overflow-x-auto rounded-lg bg-white p-6 text-black"
             >
               <div className="text-center">
                 <h2 className="text-xl font-bold tracking-tight">
@@ -158,7 +158,7 @@ export function QuoteDetailDialog({
                 </p>
               </div>
 
-              <div className="border-border overflow-hidden rounded-lg border">
+              <div className="border-border rounded-lg border">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -234,7 +234,7 @@ export function QuoteDetailDialog({
               </p>
             </div>
 
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-wrap justify-end gap-2">
               <Button variant="outline" size="sm" onClick={handlePrint}>
                 <Printer className="size-4" />
                 {t('common.print')}

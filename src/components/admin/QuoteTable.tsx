@@ -53,7 +53,7 @@ export function QuoteTable({ savedQuotes, onView, onDelete }: Props) {
           </p>
         </div>
       ) : (
-        <Table>
+        <Table className="min-w-[640px]">
           <TableHeader>
             <TableRow>
               <TableHead>{t('admin.quotes.client')}</TableHead>

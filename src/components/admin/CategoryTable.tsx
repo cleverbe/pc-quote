@@ -29,7 +29,7 @@ export function CategoryTable({ categories, onEdit, onDelete }: Props) {
           {t('admin.categories.tableTitle')}
         </h3>
       </div>
-      <Table>
+      <Table className="min-w-[480px]">
         <TableHeader>
           <TableRow>
             <TableHead>{t('admin.categories.name')}</TableHead>

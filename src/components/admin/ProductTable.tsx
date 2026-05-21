@@ -36,7 +36,7 @@ export function ProductTable({
           {t('admin.products.tableTitle')}
         </h3>
       </div>
-      <Table>
+      <Table className="min-w-[640px]">
         <TableHeader>
           <TableRow>
             <TableHead>{t('admin.products.name')}</TableHead>
