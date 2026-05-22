@@ -18,13 +18,13 @@ Admin dashboard for building and quoting custom computer configurations. Built w
 ### Local
 
 ```bash
-npm install        # Install dependencies
-npm run dev        # Start dev server
-npm run build      # Build for production
-npm run typecheck  # Type-check without building
-npm run lint       # Run ESLint
-npm run format     # Format code with Prettier
-npm run preview    # Preview production build
+pnpm install       # Install dependencies
+pnpm dev           # Start dev server
+pnpm build         # Build for production
+pnpm typecheck     # Type-check without building
+pnpm lint          # Run ESLint
+pnpm format        # Format code with Prettier
+pnpm preview       # Preview production build
 ```
 
 ### Docker

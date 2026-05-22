@@ -2,13 +2,13 @@
 
 ## Commands
 
-- `npm run dev` — Vite dev server
-- `npm run build` — `tsc -b && vite build` (typecheck then bundle)
-- `npm run generate` — Regenerate `src/routeTree.gen.ts` after adding/moving route files
-- `npm run typecheck` — `tsc -b --noEmit`
-- `npm run lint` — ESLint on all files
-- `npm run format` — Prettier on `src/**/*.{ts,tsx,css,json}`
-- `npm run prepare` — Husky install (runs automatically on `npm install`)
+- `pnpm dev` — Vite dev server
+- `pnpm build` — `tsc -b && vite build` (typecheck then bundle)
+- `pnpm generate` — Regenerate `src/routeTree.gen.ts` after adding/moving route files
+- `pnpm typecheck` — `tsc -b --noEmit`
+- `pnpm lint` — ESLint on all files
+- `pnpm format` — Prettier on `src/**/*.{ts,tsx,css,json}`
+- `pnpm prepare` — Husky install (runs automatically on `pnpm install`)
 - `docker compose up -d` — Start dev server in Docker (port 5173)
 - `docker compose up -d --build` — Rebuild and restart containers
 - `docker compose down` — Stop containers
@@ -21,7 +21,7 @@ Single-entry Vite SPA (`index.html` → `src/main.tsx` → `<StoreProvider><Rout
 
 **State**: In-memory React context (`StoreProvider` in `src/stores/StoreProvider.tsx` + `useStore` hook in `src/hooks/use-store.ts`). Categories and products are initialized with seed data on every page load. No persistence.
 
-**Routing**: TanStack Router v1 with `autoCodeSplitting: true` (each route file → separate chunk). Route tree is auto-generated at `src/routeTree.gen.ts` — **never edit manually**. After adding a new route file under `src/routes/`, run `npm run generate` to update the tree.
+**Routing**: TanStack Router v1 with `autoCodeSplitting: true` (each route file → separate chunk). Route tree is auto-generated at `src/routeTree.gen.ts` — **never edit manually**. After adding a new route file under `src/routes/`, run `pnpm generate` to update the tree.
 
 **Route naming convention**: Flat files with dots for nesting. `admin.products.tsx` → `/admin/products`. `admin.index.tsx` → `/admin/`. See `routeTree.gen.ts` for the full mapping.
 
